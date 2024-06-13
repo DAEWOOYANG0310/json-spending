@@ -1,4 +1,3 @@
-import React from "react";
 import Roter from "./shared/Roter";
 
 const App = () => {

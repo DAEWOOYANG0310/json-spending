@@ -1,7 +1,78 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import styled, { keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const DetailContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  animation: ${fadeIn} 0.5s ease-in-out;
+`;
+
+const Title = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+`;
+
+const Button = styled.button`
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem;
+  font-size: 1.2rem;
+  background-color: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #5352e6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const Input = styled.input`
+  padding: 0.8rem;
+  margin: 0.5rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const DetailInfo = styled.div`
+  margin-bottom: 1.5rem;
+  text-align: center;
+`;
+
+const DetailText = styled.p`
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  color: #555;
+`;
 
 const Detail = () => {
   const { id } = useParams();
@@ -36,7 +107,7 @@ const Detail = () => {
     mutationFn: deleteHandle,
     onSuccess: () => {
       queryClient.invalidateQueries(["lists"]);
-      navigate("/"); // 삭제 후 메인 페이지로 이동
+      navigate("/");
     },
   });
 
@@ -61,49 +132,55 @@ const Detail = () => {
   }
 
   return (
-    <div>
-      <h2>Detail</h2>
-      <button onClick={() => navigate(-1)}>뒤로가기</button>
+    <DetailContainer>
+      <Title>지출내역</Title>
+      <Button onClick={() => navigate(-1)}>뒤로가기</Button>
       {editMode ? (
         <>
-          <input
+          <Input
             type="text"
             name="date"
             defaultValue={detail.date}
             onChange={handleEditChange}
+            placeholder="날짜"
           />
-          <input
+          <Input
             type="text"
             name="category"
             defaultValue={detail.category}
             onChange={handleEditChange}
+            placeholder="항목"
           />
-          <input
+          <Input
             type="number"
             name="amount"
             defaultValue={detail.amount}
             onChange={handleEditChange}
+            placeholder="금액"
           />
-          <input
+          <Input
             type="text"
             name="content"
             defaultValue={detail.content}
             onChange={handleEditChange}
+            placeholder="내용"
           />
-          <button onClick={() => updateMutate()}>저장</button>
-          <button onClick={() => setEditMode(false)}>취소</button>
+          <Button onClick={() => updateMutate()}>저장</Button>
+          <Button onClick={() => setEditMode(false)}>취소</Button>
         </>
       ) : (
         <>
-          <p>날짜: {detail.date}</p>
-          <p>항목: {detail.category}</p>
-          <p>금액: {detail.amount}</p>
-          <p>내용: {detail.content}</p>
-          <button onClick={() => setEditMode(true)}>수정</button>
-          <button onClick={() => deleteMutate()}>삭제</button>
+          <DetailInfo>
+            <DetailText>날짜: {detail.date}</DetailText>
+            <DetailText>항목: {detail.category}</DetailText>
+            <DetailText>금액: {detail.amount}</DetailText>
+            <DetailText>내용: {detail.content}</DetailText>
+          </DetailInfo>
+          <Button onClick={() => setEditMode(true)}>수정</Button>
+          <Button onClick={() => deleteMutate()}>삭제</Button>
         </>
       )}
-    </div>
+    </DetailContainer>
   );
 };
 
