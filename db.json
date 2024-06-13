@@ -1,18 +1,11 @@
 {
-  "spendings": [
+  "lists": [
     {
-      "id": "30fd",
-      "date": "111112",
-      "category": "ㅇㅇㅇ",
-      "amount": "ㅇㅇ",
-      "content": "ㅇㅇ"
-    },
-    {
-      "id": "5dd9",
-      "date": "ㅋㅋㅋㅋㅇ",
-      "category": "ㅇㅇㅇㅇ",
-      "amount": "ㅇㅇㅇ",
-      "content": "ㅇㅇㅇㅇㅇ"
+      "id": "dcef",
+      "date": "2024/06/13",
+      "category": "핸드폰",
+      "amount": "13000000",
+      "content": "아이폰"
     }
   ]
 }
