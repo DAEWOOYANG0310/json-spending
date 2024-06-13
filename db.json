@@ -1,0 +1,18 @@
+{
+  "spendings": [
+    {
+      "id": "30fd",
+      "date": "111112",
+      "category": "ㅇㅇㅇ",
+      "amount": "ㅇㅇ",
+      "content": "ㅇㅇ"
+    },
+    {
+      "id": "5dd9",
+      "date": "ㅋㅋㅋㅋㅇ",
+      "category": "ㅇㅇㅇㅇ",
+      "amount": "ㅇㅇㅇ",
+      "content": "ㅇㅇㅇㅇㅇ"
+    }
+  ]
+}
